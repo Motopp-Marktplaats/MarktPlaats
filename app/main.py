@@ -4,11 +4,11 @@ from app.routers.ads import router as ads_router
 
 from app.routers.register import router as register_router
 from app.routers.login import router as login_router
-
+from app.routers import  ad_search
 from app.db.database import Base, engine
 from app.models.ads import Ad
 from app.models import user
-
+from app.routers import  ad_search
 
 app = FastAPI(
     title="Marktplaats API",
@@ -28,3 +28,4 @@ def root():
 app.include_router(ads_router)
 app.include_router(register_router)
 app.include_router(login_router)
+app.include_router(ad_search.router)
