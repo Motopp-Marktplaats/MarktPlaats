@@ -1,9 +1,11 @@
 import app.core.config
 from fastapi import FastAPI
 from app.routers.ads import router as ads_router
+
 from app.routers.register import router as register_router
 from app.routers.login import router as login_router
-from app.db.ads import Base, engine
+
+from app.db.database import Base, engine
 from app.models.ads import Ad
 from app.models import user
 

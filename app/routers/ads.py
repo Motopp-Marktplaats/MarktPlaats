@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 
-from app.db.ads import get_db
+from app.db.database import get_db
 from app.models.ads import Ad
 from app.schemas.ads import AdOut, AdCreate, AdUpdate
 
