@@ -2,3 +2,9 @@ pydantic
 fastapi
 uvicorn
 sqlalchemy
+python-jose[cryptography]
+python-multiparte
+email-validator
+passlib[bcrypt]==1.7.4
+bcrypt==4.0.1
+python-dotenv
