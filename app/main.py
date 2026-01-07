@@ -1,4 +1,6 @@
 import app.core.config
+import webbrowser
+
 from fastapi import FastAPI
 
 from app.routers.ads import router as ads_crud_router
@@ -10,6 +12,8 @@ from app.routers.login import router as login_router
 from app.db.database import Base, engine
 from app.models.ads import Ad
 from app.models import user
+
+from app.routers.comments import router as comments_router
 
 app = FastAPI(
     title="Marktplaats API",
@@ -32,3 +36,6 @@ app.include_router(ad_search_router)  # /ads/search
 app.include_router(register_router)
 app.include_router(login_router)
 #app.include_router(register_router) #duplicat
+app.include_router(comments_router)
+
+webbrowser.open("http://127.0.0.1:8000/docs")
