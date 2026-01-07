@@ -1,11 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
-from requests import Session
+from sqlalchemy.orm import Session
 from app.schemas.comments import CommentBase, CommentDisplay
 from app.db.database import get_db
 from app.db import db_comment
 from typing import List
-
-
 
 
 router = APIRouter(

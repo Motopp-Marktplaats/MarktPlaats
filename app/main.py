@@ -4,6 +4,7 @@ from app.routers.ads import router as ads_router
 
 from app.routers.register import router as register_router
 from app.routers.login import router as login_router
+from app.routers.comments import router as comments_router
 
 from app.db.database import Base, engine
 from app.models.ads import Ad
@@ -16,7 +17,6 @@ app = FastAPI(
     version="1.0.0"
 )
 
-
 # create tables
 Base.metadata.create_all(bind=engine)
 
@@ -28,3 +28,4 @@ def root():
 app.include_router(ads_router)
 app.include_router(register_router)
 app.include_router(login_router)
+app.include_router(comments_router)
