@@ -8,6 +8,8 @@ from app.routers.ad_search import router as ad_search_router
 
 from app.routers.register import router as register_router
 from app.routers.login import router as login_router
+from app.routers.users import router as users_router
+from app.routers.logout import router as logout_router
 
 from app.db.database import Base, engine
 from app.models.ads import Ad
@@ -35,7 +37,8 @@ app.include_router(ads_crud_router)  # CRUD/ads
 app.include_router(ad_search_router)  # /ads/search
 app.include_router(register_router)
 app.include_router(login_router)
-#app.include_router(register_router) #duplicat
-app.include_router(comments_router)
+app.include_router(users_router)
+app.include_router(logout_router)
+
 
 webbrowser.open("http://127.0.0.1:8000/docs")
