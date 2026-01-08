@@ -35,4 +35,3 @@ app.include_router(register_router)
 app.include_router(login_router)
 app.include_router(users_router)
 app.include_router(logout_router)
-
