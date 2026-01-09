@@ -12,10 +12,11 @@ router = APIRouter(
     tags=["ads"]
 )
 
+
 @router.get("/search", response_model=List[AdOut])
 def search_ads(
-    params: AdSearch = Depends(),
-    db: Session = Depends(get_db)
+        params: AdSearch = Depends(),
+        db: Session = Depends(get_db)
 ):
     query = db.query(Ad)
 
@@ -32,4 +33,3 @@ def search_ads(
         query = query.filter(Ad.price <= params.max_price)
 
     return query.order_by(Ad.id.desc()).all()
-
