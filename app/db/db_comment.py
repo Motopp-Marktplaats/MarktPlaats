@@ -1,6 +1,7 @@
 from sqlalchemy.orm.session import Session
 from app.models.comments import DbComment
 from app.schemas.comments import CommentBase
+from fastapi import HTTPException
 
 
 def create_comment(db: Session, request: CommentBase):
@@ -23,16 +24,16 @@ def read_comment(db:Session, id: int):
 
 
 def update_comment(db: Session, id: int, request: CommentBase):
-    comment = db.query(DbComment).filter(DbComment.comment_id == id)
-    comment.update({
-        DbComment.comment_id: request.comment_id,
-        DbComment.comment: request.comment,
-        DbComment.create_by_id: request.create_by_id,
-        DbComment.sent_to_id: request.sent_to_id,
-        DbComment.date: request.date
-    })
+    comment = db.query(DbComment).filter(DbComment.comment_id == id).first()
+    if not comment:
+        raise HTTPException(status_code=404, detail="Comment not found")
+    comment.comment = request.comment
+    comment.create_by_id = request.create_by_id
+    comment.sent_to_id = request.sent_to_id
+    comment.date = request.date
+
     db.commit()
-    #db.refresh(comment)
+    db.refresh(comment)
     return comment
 
 

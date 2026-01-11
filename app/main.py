@@ -1,4 +1,6 @@
 import app.core.config
+import webbrowser
+
 from fastapi import FastAPI
 from app.db.database import Base, engine
 
@@ -8,6 +10,8 @@ from app.routers.register import router as register_router
 from app.routers.login import router as login_router
 from app.routers.users import router as users_router
 from app.routers.logout import router as logout_router
+from app.routers.comments import router as comments_router
+
 from app.routers.comments import router as comments_router
 
 app = FastAPI(
@@ -29,6 +33,9 @@ app.include_router(register_router)
 app.include_router(login_router)
 app.include_router(users_router)
 app.include_router(logout_router)
+
+
+webbrowser.open("http://127.0.0.1:8000/docs")
 app.include_router(ads_crud_router)  # CRUD/ads
 app.include_router(ad_search_router)  # /ads/search
 app.include_router(comments_router)
