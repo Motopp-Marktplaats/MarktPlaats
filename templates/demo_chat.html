@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Demo Chat</title></head>
+<body>
+  <h3>WebSocket Chat Demo</h3>
+
+  <label>Token (JWT):</label><br/>
+  <input id="token" style="width:600px" /><br/><br/>
+
+  <label>Receiver ID:</label><br/>
+  <input id="receiver" type="number" /><br/><br/>
+
+  <label>Message:</label><br/>
+  <input id="msg" style="width:600px" />
+  <button onclick="sendMsg()">Send</button>
+
+  <pre id="log" style="background:#111;color:#0f0;padding:10px;height:300px;overflow:auto;"></pre>
+
+  <button onclick="connectWS()">Connect</button>
+
+  <script>
+    let ws;
+
+    function log(text){
+      document.getElementById("log").textContent += text + "\n";
+    }
+
+    function connectWS(){
+      const token = document.getElementById("token").value.trim();
+      ws = new WebSocket(`ws://localhost:8000/ws/messages?token=${token}`);
+
+      ws.onopen = () => log("✅ connected");
+      ws.onmessage = (e) => log("📩 " + e.data);
+      ws.onclose = () => log("❌ disconnected");
+    }
+
+    function sendMsg(){
+      const receiver_id = Number(document.getElementById("receiver").value);
+      const content = document.getElementById("msg").value;
+
+      ws.send(JSON.stringify({
+          receiver_id: Number(document.getElementById("receiver").value),
+  content: document.getElementById("msg").value,
+  ad_id: null
+      }));
+      document.getElementById("msg").value = "";
+    }
+  </script>
+</body>
+</html>

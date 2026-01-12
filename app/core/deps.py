@@ -41,3 +41,23 @@ def get_current_user(
         )
 
     return user
+
+
+
+def get_current_user_from_token(token: str, db: Session) -> User:
+    payload = decode_token(token)
+    username = payload.get("sub")
+    jti = payload.get("jti")
+
+    if not username or not jti:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token payload")
+
+    blacklisted = db.query(TokenBlacklist).filter(TokenBlacklist.jti == jti).first()
+    if blacklisted:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token has been revoked (logged out)")
+
+    user = db.query(User).filter(User.username == username).first()
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found")
+
+    return user
