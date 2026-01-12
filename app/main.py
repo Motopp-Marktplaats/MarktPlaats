@@ -17,8 +17,7 @@ from app.routers.ad_search import router as ads_router
 
 
 from app.db.database import Base, engine
-from app.models.ads import Ad
-from app.models import user
+
 
 app = FastAPI(
     title="Marktplaats API",
