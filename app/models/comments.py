@@ -8,7 +8,7 @@ from sqlalchemy.orm import relationship
 class DbComment(Base):
     __tablename__ = "comments"
 
-    comment_id = Column(Integer, primary_key=True, index=True)  # uniqe id
+    id = Column(Integer, primary_key=True, index=True)  # uniqe id
     comment = Column(String(100), nullable=False)
     create_by_id = Column(Integer, nullable=False)
     sent_to_id = Column(Integer, nullable=False)

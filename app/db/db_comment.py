@@ -28,9 +28,9 @@ def update_comment(db: Session, id: int, request: CommentBase):
     if not comment:
         raise HTTPException(status_code=404, detail="Comment not found")
     comment.comment = request.comment
-    comment.create_by_id = request.create_by_id
-    comment.sent_to_id = request.sent_to_id
-    comment.date = request.date
+    #comment.create_by_id = request.create_by_id
+    #comment.sent_to_id = request.sent_to_id
+    #comment.date = request.date
 
     db.commit()
     db.refresh(comment)
