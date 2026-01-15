@@ -25,7 +25,7 @@ from app.routers.ad_search import router as ads_router
 
 from app.db.database import Base, engine
 
-templates = Jinja2Templates(directory="app/templates")
+templates = Jinja2Templates(directory="templates")
 app = FastAPI(
     title="Marktplaats API",
     description="Backend API for the Marktplaats project",
