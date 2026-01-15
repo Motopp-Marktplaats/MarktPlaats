@@ -24,7 +24,7 @@ class AdsService:
 
     def create_ad(self, payload, current_user_id: int):
         data = payload.model_dump()
-        data["owner_id"] = current_user_id  # de eigenaar van de token
+        data["owner_id"] = current_user_id
 
         ad = Ad(**data)
         self.db.add(ad)
