@@ -13,7 +13,7 @@ class DbComment(Base):
     create_by_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     #user=relationship("users", back_populates="comments")
 
-    sent_to_id = Column(Integer, nullable=False)
+    sent_to_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     #receiver_id =relationship("users", back_populates="comments")
 
     advertisement_id = Column(Integer, ForeignKey("advertisements.id"), nullable=False)

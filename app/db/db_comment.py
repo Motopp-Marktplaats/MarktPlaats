@@ -1,12 +1,14 @@
 from sqlalchemy.orm.session import Session
+
+from app.models import user
 from app.models.comments import DbComment
 from app.schemas.comments import CommentBase
 from fastapi import HTTPException
 
-def create_comment(db: Session, request: CommentBase):
+def create_comment(db: Session, request: CommentBase, user_id: int):
     new_comment = DbComment(
         comment=request.comment,
-        create_by_id=request.create_by_id,
+        create_by_id=user_id,
         sent_to_id=request.sent_to_id,
         advertisement_id = request.advertisement_id,
         date=request.date
@@ -22,8 +24,8 @@ def read_all_comments(db:Session):
 def read_comment(db:Session, id: int):
     return db.query(DbComment).filter(DbComment.id == id).first()
 
-def update_comment(db: Session, id: int, request: CommentBase):
-    comment = db.query(DbComment).filter(DbComment.id == id).first()
+def update_comment(db: Session, id: int, request: CommentBase, user_id=int):
+    comment = db.query(DbComment).filter(DbComment.id == id, DbComment.create_by_id == user_id).first()
     if not comment:
         raise HTTPException(status_code=404, detail="Comment not found")
     comment.comment = request.comment
