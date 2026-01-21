@@ -5,7 +5,7 @@ from app.models import messages, ads, user # needed to register models
 from  fastapi.templating import Jinja2Templates
 from fastapi.requests import Request
 from fastapi.responses import HTMLResponse
-
+from app.routers import ratings
 
 from app.db.database import Base, engine
 
@@ -42,6 +42,7 @@ def root():
 @app.get("/demo-chat", response_class=HTMLResponse)
 def demo_chat(request: Request):
     return templates.TemplateResponse("demo_chat.html", {"request": request})
+app.include_router(ratings.router)
 # Register routers
 app.include_router(register_router)
 app.include_router(login_router)
