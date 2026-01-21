@@ -23,7 +23,7 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -
 
     # jti (unique token id) - needed for logout/blacklist
     if "jti" not in to_encode:
-        to_encode["jti"] = str(uuid.uuid4())
+        to_encode["jti"] = str(uuid4())
 
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 

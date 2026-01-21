@@ -17,6 +17,6 @@ class DbComment(Base):
     #receiver_id =relationship("users", back_populates="comments")
 
     advertisement_id = Column(Integer, ForeignKey("advertisements.id"), nullable=False)
-    #ads =relationship('advertisements', back_populates="comments")
+    #advertisement = relationship("Advertisement", lazy="joined")
 
     date = Column(Date, default=datetime.date.today)
